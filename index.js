@@ -16,6 +16,9 @@ server.get("/get-user",verifyToken,findUser)
 server.listen("6000",()=>{
   console.log("server started")
 })
-mongoose.connect("mongodb://localhost:27017/hospital")
-.then(data=>console.log("database is connected"))
-.catch(error=>console.log("Error"))
+mongoose
+  .connect(
+    "mongodb+srv://roushan915520:Las2j8wgyuDgntTz@cluster0.5mlxslz.mongodb.net/hospital"
+  )
+  .then((data) => console.log("database is connected"))
+  .catch((error) => console.log("Error"));

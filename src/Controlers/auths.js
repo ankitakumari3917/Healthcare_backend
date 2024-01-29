@@ -1,48 +1,30 @@
 const User = require("../Models/User");
 const jwt =require("jsonwebtoken")
-// exports.register = async (req, res) => {
-//   const { name, phone, email, password } = req.body;
-  
-//   const _user = new User({ name, email, phone, password });
-
-//   const eUser = await User.findOne({ email });
-  
-//   if (!eUser) {
-//     _user
-//       .save()
-//       .then((newUser) => {
-//         return res.status(201).json({message:"Account Created Successfully"});
-//       })
-//       .catch((error) => {
-//         return res.status(400).json({
-//           message: "Error occured",
-//           error,
-//         });
-//       });
-//   } else {
-//     return res.status(400).json({
-//       message: "user Already Exist",
-//     });
-//   }
-// };
 exports.register = async (req, res) => {
   const { name, phone, email, password } = req.body;
+  
+  const _user = new User({ name, email, phone, password });
 
-  try {
-    const existingUser = await User.findOne({ email });
-
-    if (existingUser) {
-      return res.status(400).json({ message: "User Already Exists" });
-    }
-
-    const newUser = new User({ name, email, phone, password });
-    await newUser.save();
-    
-    return res.status(201).json({ message: "Account Created Successfully" });
-  } catch (error) {
-    return res.status(500).json({ message: "Error occurred", error });
+  const eUser = await User.findOne({ email });
+  
+  if (!eUser) {
+    _user
+      .save()
+      .then((newUser) => {
+        return res.status(201).json({message:"Account Created Successfully"});
+      })
+      .catch((error) => {
+        return res.status(400).json({
+          message: "Error occured",
+          error,
+        });
+      });
+  } else {
+    return res.status(400).json({
+      message: "user Already Exist",
+    });
   }
-};
+ };
 exports.login = async (req, res) => {
   const{email,password}=req.body;
  
