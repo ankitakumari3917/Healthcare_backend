@@ -3,30 +3,26 @@ const bcrypt=require("bcrypt")
 const user = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
   phone: {
     type: Number,
-    required: true,
+    required: true
   },
   email: {
     type: String,
-    required: true,
-  },
-  hash_password:{
-    type:String,
-    required:true,
-  },
-  gender:{
-    type:String,
-    enum: ['male', 'female','others'],
     required: true
   },
-  category:{
-    type:String,
-    enum:["doctor","patient"],
-    required:true
-  }
+  hash_password: {
+    type: String,
+    required: true
+  },
+  gender: {
+    type: String,
+    enum: ["male", "female", "others"],
+    required: true
+  },
+  category: { type: String }
 });
 
 user.virtual("password").set(function(password){
