@@ -16,6 +16,16 @@ const user = new mongoose.Schema({
   hash_password:{
     type:String,
     required:true,
+  },
+  gender:{
+    type:String,
+    enum: ['male', 'female','others'],
+    required: true
+  },
+  category:{
+    type:String,
+    enum:["doctor","patient"],
+    required:true
   }
 });
 
