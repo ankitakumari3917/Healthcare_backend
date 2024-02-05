@@ -21,7 +21,7 @@ server.use(cors());
 server.post("/register",validateForm,isValidated,register)
 server.post("/login",login)
 server.get("/get-user",verifyToken,findUser)
-server.listen("6000",()=>{
+server.listen("3000",()=>{
   console.log("server started")
 })
 mongoose
