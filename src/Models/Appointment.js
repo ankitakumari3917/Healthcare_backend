@@ -17,10 +17,23 @@ const Patient = new mongoose.Schema({
       type: String,
       required: true
     },
-    gender:{
+   
+    time:{
       type:String,
-      enum: ['male', 'female','others'],
-      required: true
-    }
+      required:true,
+    },
+    category:{
+      type: String,
+      required: true,
+    },
+   problem:{
+    type: String,
+    required: true
+   } ,
+   address:{
+    type: String,
+    required: true,
+   }
+
 });
 module.exports = mongoose.model("Patientdata", Patient);

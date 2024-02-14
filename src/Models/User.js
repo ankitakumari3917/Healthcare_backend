@@ -22,7 +22,11 @@ const user = new mongoose.Schema({
     enum: ["male", "female", "others"],
     required: true
   },
-  category: { type: String }
+  category: { 
+    type: String,
+    enum: ["patient", "doctor"],
+    required: true
+  }
 });
 
 user.virtual("password").set(function(password){
