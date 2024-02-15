@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
- const { sendEmail } = require("../Helper/Email"); // Update the path accordingly
+const { sendEmail } = require("../Helper/Email"); // Update the path accordingly
 const User = require("../Models/User");
-const Patient =require("../Models/Appointment")
+const Patient = require("../Models/Appointment");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   host: "smtp.gmail.com",
@@ -26,7 +26,7 @@ async function sendWelcomeEmail(userEmail) {
 
 exports.register = async (req, res) => {
   const { name, phone, email, password, gender, category } = req.body;
-  console.log(`received:,${ name, phone, email, password, gender, category }`);
+  console.log(`received:,${(name, phone, email, password, gender, category)}`);
   const _user = new User({ name, email, phone, password, gender, category });
 
   const eUser = await User.findOne({ email });
@@ -123,26 +123,45 @@ exports.findUser = async (req, res) => {
   return res.status(200).json({ user });
 };
 
-
-
-
 exports.appoint = async (req, res) => {
   try {
-    const { name, phone, email, dob, time, category, address, problem } = req.body;
+    const { name, phone, email, dob, time, category, address, problem } =
+      req.body;
 
-    // Validate input
-    if (!name || !phone || !email || !dob || !time || !category || !address || !problem) {
-      return res.status(400).json({ message: "All fields are required" });
+    if (
+      !name ||
+      !phone ||
+      !email ||
+      !dob ||
+      !time ||
+      !category ||
+      !address ||
+      !problem
+    ) {
+      return res.status(400).json({ message: "All fields are required",status:0 });
     }
 
     // Create a new User instance
-    const newPatient = new Patient({ name, phone, email, dob, time, category, address, problem });
+    const newPatient = new Patient({
+      name,
+      phone,
+      email,
+      dob,
+      time,
+      category,
+      address,
+      problem,
+    });
 
     // Save the user to the database
     await newPatient.save();
 
     // Return success response
-    return res.status(201).json({ message: "Appointment booked successfully", appointment: newPatient });
+    return res.status(201).json({
+      message: "Appointment booked successfully",
+      appointment: newPatient,
+      status:1
+    });
   } catch (error) {
     // Handle errors
     console.error("Error in booking appointment:", error);
